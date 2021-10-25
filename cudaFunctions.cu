@@ -12,7 +12,8 @@ __global__  void calculateHist(int *arr, int numElements, int* output) {
         atomicAdd(&hist[arr[index]],1);
     }
     __syncthreads();
-    // The thread with index 0 will merge the shared memory histogram with the global
+
+    // The thread with index 0 will merge the shared memory histogram with the global histogram using atomicAdd()
     if(threadIdx.x==0)
     {
         for(int i=0; i< 256; i++)
